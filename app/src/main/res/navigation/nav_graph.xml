@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment2"
-        android:name="com.ilatyphi95.farmersmarket.SplashFragment"
+        android:name="com.ilatyphi95.farmersmarket.ui.registration.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
@@ -15,10 +15,13 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/splashFragment2"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment2_to_homeActivity"
+            app:destination="@id/homeActivity" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.ilatyphi95.farmersmarket.LoginFragment"
+        android:name="com.ilatyphi95.farmersmarket.ui.registration.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -32,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.ilatyphi95.farmersmarket.SignUpFragment"
+        android:name="com.ilatyphi95.farmersmarket.ui.registration.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_up">
         <action

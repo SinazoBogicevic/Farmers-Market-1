@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_navigation_home_to_productFragment"
             app:destination="@id/productFragment" />
-        <action
-            android:id="@+id/action_navigation_home_to_navigation_message"
-            app:destination="@id/navigation_message" />
     </fragment>
 
     <fragment
@@ -24,8 +21,8 @@
         android:label="@string/title_message"
         tools:layout="@layout/fragment_message" >
         <action
-            android:id="@+id/action_navigation_message_to_navigation_settings"
-            app:destination="@id/navigation_settings" />
+            android:id="@+id/action_navigation_message_to_chatFragment"
+            app:destination="@id/chatFragment" />
     </fragment>
 
     <fragment
@@ -34,14 +31,14 @@
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" >
         <action
-            android:id="@+id/action_navigation_settings_to_loginFragment2"
-            app:destination="@id/loginFragment2" />
+            android:id="@+id/action_navigation_settings_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
 
 <!--    for testing purpose don't forget to remove it-->
     <fragment
         android:id="@+id/productFragment"
-        android:name="com.ilatyphi95.farmersmarket.ProductFragment"
+        android:name="com.ilatyphi95.farmersmarket.ui.addetails.ProductFragment"
         android:label="ProductFragment" >
         <action
             android:id="@+id/action_productFragment_self"
@@ -51,10 +48,46 @@
         <argument
             android:name="product"
             app:argType="com.ilatyphi95.farmersmarket.data.entities.Product" />
+        <action
+            android:id="@+id/action_productFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
     </fragment>
     <fragment
-        android:id="@+id/loginFragment2"
-        android:name="com.ilatyphi95.farmersmarket.LoginFragment"
-        android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        android:id="@+id/navigation_pager"
+        android:name="com.ilatyphi95.farmersmarket.ui.ads.PagerFragment"
+        android:label="fragment_pager"
+        tools:layout="@layout/fragment_pager" >
+        <action
+            android:id="@+id/action_navigation_pager_to_productFragment"
+            app:destination="@id/productFragment" />
+        <action
+            android:id="@+id/action_navigation_pager_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.ilatyphi95.farmersmarket.ui.modifyad.ModifyAdsFragment"
+        android:label="AddProductFragment" >
+        <argument
+            android:name="adsId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.ilatyphi95.farmersmarket.ui.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+        <argument
+            android:name="messageId"
+            app:argType="string" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.ilatyphi95.farmersmarket.MainActivity"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.ilatyphi95.farmersmarket
+package com.ilatyphi95.farmersmarket.data.repository
 
 import com.ilatyphi95.farmersmarket.data.entities.Product
 import com.thedeanda.lorem.LoremIpsum
@@ -53,13 +53,19 @@ object ProductGenerator{
 
     private fun generateList() : List<String> {
         val list = mutableSetOf<String>()
-        val until = imagesUrl.size - 1
-        val count = Random.nextInt(1, until)
+        val count = Random.nextInt(1, imagesUrl.size -1)
 
         for(i in 1..count){
-            list.add(imagesUrl[Random.nextInt(0, until)])
+            list.add(generateImage())
         }
 
         return list.toList()
+    }
+
+
+    fun generateImage() : String {
+
+        val until = imagesUrl.size - 1
+        return  imagesUrl[Random.nextInt(0, until)]
     }
 }
