@@ -35,9 +35,12 @@ class MessageFragment : Fragment() {
 
         viewmodel.apply {
             eventMessage.observe(viewLifecycleOwner, EventObserver{
+                /**
                 findNavController()
                     .navigate(MessageFragmentDirections.actionNavigationMessageToChatFragment(it))
+                */
             })
+
         }
         return binding.root
     }

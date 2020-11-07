@@ -2,14 +2,12 @@ package com.ilatyphi95.farmersmarket.data.repository
 
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import com.ilatyphi95.farmersmarket.data.entities.ChatMessage
 import com.ilatyphi95.farmersmarket.data.entities.Product
+import com.ilatyphi95.farmersmarket.data.entities.User
 import java.util.*
 
 class ProductsRepo {
@@ -157,6 +155,71 @@ class ProductsRepo {
 
         })
         println(userProducts.size)
+    }
+
+    /**
+    private fun refreshRecyclerViewMessages() {
+        adapter.clear()
+        latestMessagesMap.values.forEach {
+            adapter.add(LatestMessageRow(it))
+        }
+    }
+    */
+
+    /**
+     * listens for latest messages
+     * @param latestMessagesMap maps latest messages user has sent or received
+     */
+
+    private fun listenForLatestMessages(latestMessagesMap: MutableMap<String, ChatMessage>) {
+        val chatId = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/latest-messages/$chatId")
+        ref.addChildEventListener(object: ChildEventListener {
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                val chatMessage = p0.getValue(ChatMessage::class.java) ?: return
+                latestMessagesMap[p0.key!!] = chatMessage
+                //refreshRecyclerViewMessages()
+            }
+
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                val chatMessage = p0.getValue(ChatMessage::class.java) ?: return
+                latestMessagesMap[p0.key!!] = chatMessage
+                //refreshRecyclerViewMessages()
+            }
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+
+            }
+            override fun onChildRemoved(p0: DataSnapshot) {
+
+            }
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        })
+    }
+
+    /**
+     * fetches logged in user info
+     */
+
+    private fun fetchCurrentUser(): User {
+        var currentUser: User? = null
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+
+            override fun onDataChange(p0: DataSnapshot) {
+                currentUser = p0.getValue(User::class.java)
+                Log.d("LatestMessages", "Current user ${currentUser!!.firstName}")
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        })
+
+        return currentUser!!
     }
 
     companion object {
