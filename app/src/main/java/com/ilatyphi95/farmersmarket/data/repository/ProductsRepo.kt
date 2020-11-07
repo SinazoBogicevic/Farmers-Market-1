@@ -28,7 +28,7 @@ class ProductsRepo {
 
 
     /**
-     * map images
+     * send images to storage which will be sent to the products db user node
      */
     private suspend fun sendImagesToStorage(images: MutableList<Uri>): MutableMap<String, String> {
         val map: MutableMap<String, String> = mutableMapOf()
@@ -199,28 +199,6 @@ class ProductsRepo {
         })
     }
 
-    /**
-     * fetches logged in user info
-     */
-
-    private fun fetchCurrentUser(): User {
-        var currentUser: User? = null
-        val uid = FirebaseAuth.getInstance().uid
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        ref.addListenerForSingleValueEvent(object: ValueEventListener {
-
-            override fun onDataChange(p0: DataSnapshot) {
-                currentUser = p0.getValue(User::class.java)
-                Log.d("LatestMessages", "Current user ${currentUser!!.firstName}")
-            }
-
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-        })
-
-        return currentUser!!
-    }
 
     companion object {
         val TAG = "ProductsRepo"
