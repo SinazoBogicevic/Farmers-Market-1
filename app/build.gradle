@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'androidx.navigation.safeargs'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
@@ -97,8 +96,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
     implementation 'androidx.navigation:navigation-ui:2.3.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+
 
     // Declare the dependency for the Firebase SDK for Google Analytics
     implementation 'com.google.firebase:firebase-analytics:17.6.0'
