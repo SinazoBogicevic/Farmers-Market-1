@@ -67,7 +67,7 @@ class ProductsRepo {
             productId?.let {
                 Product(
                     it, "product_name", "this is the product description", uid, "livestock",
-                    imgsUrl, 100, 50, "8"
+                    imgsUrl, 100, 50, "8", 1024345978
                 )
             }
         Log.d(TAG, product.toString())
@@ -77,7 +77,7 @@ class ProductsRepo {
                 //clear photoList
             }
             .addOnFailureListener {
-                Log.d(TAG, "faile to save products to db ${it.message}")
+                Log.d(TAG, "failed to save products to db ${it.message}")
                 //alert user to failure
             }
     }
