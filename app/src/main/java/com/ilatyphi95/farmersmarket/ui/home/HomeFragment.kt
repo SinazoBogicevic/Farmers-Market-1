@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.ilatyphi95.farmersmarket.databinding.FragmentHomeBinding
 import com.ilatyphi95.farmersmarket.utils.EventObserver
 import com.ilatyphi95.farmersmarket.data.repository.SampleRepository
@@ -15,6 +16,8 @@ import com.ilatyphi95.farmersmarket.data.repository.SampleRepository
 class HomeFragment : Fragment() {
 
     lateinit var binding : FragmentHomeBinding
+    private lateinit var firebaseAuth: FirebaseAuth
+    private var authstateListener: FirebaseAuth.AuthStateListener? = null
 
     private val homeViewModel by viewModels<HomeViewModel> {
         HomeViewModelFactory(SampleRepository())
@@ -58,5 +61,33 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun verifyIsLoggedIn() {
+        firebaseAuth = FirebaseAuth.getInstance()
+        authstateListener = FirebaseAuth.AuthStateListener { lister ->
+            if (firebaseAuth.currentUser == null) {
+                //go to login page
+            }
+        }
+    }
+
+    private fun attachListener() {
+        firebaseAuth.addAuthStateListener(authstateListener!!)
+    }
+
+    private fun detachListener() {
+        firebaseAuth.removeAuthStateListener(authstateListener!!)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        attachListener()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        detachListener()
     }
 }
