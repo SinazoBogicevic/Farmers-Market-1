@@ -32,9 +32,13 @@ class SampleRepository : IRepository {
         )
     }
 
-    override suspend fun getRecentProducts(): List<Product> {
+    override suspend fun allProducts(): List<Product> {
         delay(1000)
         return ProductGenerator.resetList(15)
+    }
+
+    override suspend fun getRecentProducts(): List<Product> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun getCloseByProduct(): List<CloseByProduct> {
@@ -64,6 +68,10 @@ class SampleRepository : IRepository {
             location = "Nigeria",
             profileDisplayName = "ilatyphi95"
         )
+    }
+
+    override suspend fun getUserProducts(): List<Product> {
+        TODO("Not yet implemented")
     }
 
     override fun insertProduct(product: Product) {
@@ -99,6 +107,10 @@ class SampleRepository : IRepository {
 
     override suspend fun getMessageList(): List<Message>? {
         return randomMessages()
+    }
+
+    override fun insertRecentProduct(product: Product) {
+        TODO("Not yet implemented")
     }
 
     private fun randomMessages(): List<Message>? {

@@ -50,7 +50,7 @@ class HomeViewModel(private val repository: IRepository) : ViewModel() {
                     } }.map { it.toRecyclerItem() })
 
 
-                _recentItems.postValue(repository.getRecentProducts()
+                _recentItems.postValue(repository.allProducts()
                     .map {
                     ProductSmallBannerViewModel(it).apply {
                         itemClickHandler = {it -> productSelected(it)}

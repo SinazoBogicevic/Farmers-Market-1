@@ -25,14 +25,14 @@ data class Product @JvmOverloads constructor(
     val description: String,
     val sellerId: String,
     val type: String,
-    val imgUrls: MutableMap<String, String> = mutableMapOf(),
+    val imgUrls: MutableList<String> = mutableListOf(),
     var qtyAvailable: Int,
     var qtySold: Int,
     val priceStr: String = "USD-0",
     val postedOn: Long = System.currentTimeMillis()
 ) : Parcelable {
     constructor() : this("", "", "", "", "",
-        mutableMapOf<String, String>(), -1, -1, "", 1)
+        mutableListOf<String>(), -1, -1, "", 1)
 
     @IgnoredOnParcel
     val price = stringToMoney(priceStr)
